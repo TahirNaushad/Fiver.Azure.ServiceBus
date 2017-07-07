@@ -26,7 +26,7 @@ namespace Fiver.Azure.ServiceBus.Topic
         {
             var json = JsonConvert.SerializeObject(item);
             var message = new Message(Encoding.UTF8.GetBytes(json));
-
+            
             if (properties != null)
             {
                 foreach (var prop in properties)

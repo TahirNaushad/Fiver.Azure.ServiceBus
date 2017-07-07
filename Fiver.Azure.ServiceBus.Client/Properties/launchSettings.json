@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Fiver.Azure.ServiceBus.Client": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
