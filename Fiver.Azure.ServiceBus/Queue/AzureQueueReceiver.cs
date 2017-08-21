@@ -3,6 +3,7 @@ using Microsoft.Azure.ServiceBus;
 using Newtonsoft.Json;
 using System;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Fiver.Azure.ServiceBus.Queue
 {
@@ -21,7 +22,11 @@ namespace Fiver.Azure.ServiceBus.Queue
             Action<Exception> onError,
             Action onWait)
         {
-            var options = new MessageHandlerOptions
+            var options = new MessageHandlerOptions(e => 
+            {
+                onError(e.Exception);
+                return Task.CompletedTask;
+            })
             {
                 AutoComplete = false,
                 MaxAutoRenewDuration = TimeSpan.FromMinutes(1)

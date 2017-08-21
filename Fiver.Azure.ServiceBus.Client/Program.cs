@@ -45,7 +45,7 @@ namespace Fiver.Azure.ServiceBus.Client
                 connectionString: config["ServiceBus_ConnectionString"],
                 queueName: config["ServiceBus_QueueName"]);
 
-            var message = new Message { Text = "Hello Queue" };
+            var message = new Message { Text = $"Hello Queue at {DateTime.Now.ToString()}" };
 
             IAzureQueueSender<Message> sender = new AzureQueueSender<Message>(settings);
             await sender.SendAsync(message);
@@ -65,6 +65,7 @@ namespace Fiver.Azure.ServiceBus.Client
             receiver.Receive(
                 message =>
                 {
+                    throw new ApplicationException("Oops!");
                     Console.WriteLine(message.Text);
                     return MessageProcessResponse.Complete;
                 },
@@ -84,7 +85,7 @@ namespace Fiver.Azure.ServiceBus.Client
                 connectionString: config["ServiceBus_ConnectionString"],
                 topicName: config["ServiceBus_TopicName"]);
 
-            var message = new Message { Text = "Hello Topic" };
+            var message = new Message { Text = $"Hello Topic at {DateTime.Now.ToString()}" };
 
             IAzureTopicSender<Message> sender = new AzureTopicSender<Message>(settings);
             await sender.SendAsync(message);
